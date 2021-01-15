@@ -1,36 +1,31 @@
-import React from 'react';
-import { StyleSheet, View, Text, Platform } from 'react-native';
-import { Order } from '../types';
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import "intl";
-import "intl/locale-data/jsonp/pt-BR.js";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { Order } from "../types";
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 
-if (Platform.OS === "android") {
-    if (typeof (Intl as any).disableRegExpRestore === "function") {
-        (Intl as any).disableRegExpRestore();
-    }
-}
-
-dayjs.locale('pt-br')
-dayjs.extend(relativeTime)
+dayjs.locale('pt-br');
+dayjs.extend(relativeTime);
 
 type Props = {
-  order: Order
+  order: Order;
 }
 
 function dateFromNow(date: string) {
-  return dayjs(date).fromNow()
+  return dayjs(date).fromNow();
 }
 
-function formatPrice(price: number) {
+export function formatPrice(price: number) {
   const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL'
-  })
+    currency: 'BRL',
+    minimumFractionDigits: 2
+  });
 
-  return formatter.format(price)
+  return formatter.format(price);
 }
 
 export default function OrderCard({ order }: Props) {
@@ -42,9 +37,11 @@ export default function OrderCard({ order }: Props) {
       </View>
       <Text style={styles.text}>{dateFromNow(order.moment)}</Text>
       <View style={styles.productsList}>
-        {order.products.map(product => (
-          <Text key={product.id} style={styles.text}>{product.name}</Text>
-        ))}
+        {
+          order.products.map(product => (
+            <Text key={product.id} style={styles.text}>{product.name}</Text>
+          ))
+        }
       </View>
     </View>
   );
