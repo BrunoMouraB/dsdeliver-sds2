@@ -7,5 +7,5 @@ export function fetchOrders() {
 } 
 
 export function confirmDelivery(orderId: number) {
-  return axios.put(`${API_URL}/orders/${orderId}/delivered`)s
+  return axios.put(`${API_URL}/orders/${orderId}/delivered`)
 }
