@@ -9,7 +9,7 @@ export type Order = {
     total: number;
   }
   
-  export type Product = {
+    export type Product = {
     id: number;
     name: string;
     price: number;

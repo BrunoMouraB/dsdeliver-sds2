@@ -10,7 +10,7 @@ import { confirmDelivery } from "../api";
 type Props = {
   route: {
     params: {
-      order: Order;
+      order: Order; 
     };
   };
 };
